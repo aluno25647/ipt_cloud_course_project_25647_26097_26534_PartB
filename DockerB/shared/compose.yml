@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: aluno25647/ipt-cloud-web:V1.6
+    image: aluno25647/ipt-cloud-web:V1.7
     deploy:
       replicas: 3
       update_config:
@@ -19,7 +19,7 @@ services:
       - app-network
 
   ws:
-    image: aluno25647/ipt-cloud-ws:V1.6
+    image: aluno25647/ipt-cloud-ws:V1.7
     deploy:
       replicas: 2
       update_config:
