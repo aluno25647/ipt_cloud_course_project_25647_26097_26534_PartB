@@ -52,24 +52,21 @@ A arquitetura inclui servidores web e websockets redundantes e monitorização e
    vagrant up
 
 3.  Aceda ao Node1 (manager)
-  ```bash
-  vagrant ssh node1
-  ```
+    ```bash
+    vagrant ssh node1
 
 4.  Aceder à pasta shared
-  ```bash
-  cd /home/vagrant/shared
-  ```
+      ```bash
+      cd /home/vagrant/shared
 
 5. Compose up
-  ```bash
-  docker stack deploy -c compose.yml stackb
-  ```
+   ```bash
+   docker stack deploy -c compose.yml stackb
 
 6. Aceda à aplicação web através do IP configurado (http://192.168.46.11).
   
 7. Para aceder a outras funcionalidades:
 
-   ```bash
+      ```bash
     [Portainer]
     http://192.168.46.11:9000
