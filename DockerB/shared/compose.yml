@@ -40,7 +40,7 @@ services:
       POSTGRES_PASSWORD: mypassword
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ../provision/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./provision/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     ports:
       - "5432:5432"
     networks:

@@ -1,0 +1,4 @@
+FROM postgres:14
+
+# Copiar o script de inicialização
+COPY ./provision/dump.sql /docker-entrypoint-initdb.d/

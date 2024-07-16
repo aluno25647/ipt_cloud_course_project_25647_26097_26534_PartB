@@ -26,7 +26,11 @@ RUN chown -R www-data:www-data /var/www/html \
 # composer and dependencies
 WORKDIR /var/www/html/
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# https://github.com/composer/composer/issues/11073
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 RUN composer install --no-dev --optimize-autoloader
+
 
 # Install PHP dependencies, including Predis
 RUN composer require predis/predis \
