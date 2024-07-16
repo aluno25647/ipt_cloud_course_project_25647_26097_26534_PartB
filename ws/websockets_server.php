@@ -1,7 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-use Predis\Client as RedisClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
@@ -11,27 +10,16 @@ use Ratchet\WebSocket\WsServer;
 class NotificationServer implements MessageComponentInterface
 {
     protected $clients;
-    protected $redis;
 
     public function __construct()
     {
         $this->clients = new \SplObjectStorage();
-        $this->redis = new RedisClient([
-            'scheme' => 'tcp',
-            'host'   => 'redis',
-            'port'   => 6379,
-        ]);
     }
 
     public function onOpen(ConnectionInterface $conn)
     {
         $this->clients->attach($conn);
         echo "New connection! ({$conn->resourceId})\n";
-        
-        // Subscribe to the Redis channel
-        $this->redis->subscribe(['notifications'], function ($message) use ($conn) {
-            $conn->send($message->payload);
-        });
     }
 
     public function onMessage(ConnectionInterface $from, $message)
@@ -44,10 +32,6 @@ class NotificationServer implements MessageComponentInterface
         $data['message'] = htmlspecialchars($data['message'], ENT_QUOTES, 'UTF-8');
        
         $message = json_encode($data);
-
-        // Publish the message to the Redis channel
-        $this->redis->publish('notifications', $message);
-        
         // Broadcast the modified message to all connected clients
         foreach ($this->clients as $client) {
             $client->send($message);
