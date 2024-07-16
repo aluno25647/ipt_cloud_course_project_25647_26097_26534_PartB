@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: aluno25647/ipt-cloud-web:V1.7
+    image: aluno25647/ipt-cloud-web:V1.13
     deploy:
       replicas: 3
       update_config:
@@ -19,7 +19,7 @@ services:
       - app-network
 
   ws:
-    image: aluno25647/ipt-cloud-ws:V1.7
+    image: aluno25647/ipt-cloud-ws:V1.13
     deploy:
       replicas: 2
       update_config:
@@ -29,9 +29,6 @@ services:
         condition: on-failure
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-      - redis
     networks:
       - app-network
 
@@ -43,6 +40,9 @@ services:
       POSTGRES_PASSWORD: mypassword
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ../provision/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - "5432:5432"
     networks:
       - app-network
 
