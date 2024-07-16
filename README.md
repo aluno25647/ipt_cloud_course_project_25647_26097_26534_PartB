@@ -22,7 +22,7 @@ A arquitetura inclui servidores web e websockets redundantes e monitorização e
 ### Componentes Principais do Projeto
 
 - **Web Server (Apache + PHP)**: Serviço web base do projeto.
-- **WebSockets**: Serviço de WebSockets para comunicação através de um chat em tempo real.
+- **WebSockets (PHP)**: Serviço de WebSockets para comunicação através de um chat em tempo real.
 - **Database (Postgres)**: Banco de dados para armazenamento de informações persistentes.
 - **GlusterFS**: Sistema de arquivos distribuído para armazenamento compartilhado, proporcionando redundância e alta disponibilidade dos dados.
 - **Docker**: Motor Docker para execução de containers, simplificando a implementação e a gestão dos serviços do projeto.
